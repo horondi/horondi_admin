@@ -22,7 +22,10 @@ const buttonTitles = {
   CREATE_SPECIAL_USER: 'Створити спецкористувача',
   ADD_PHOTO_LABEL: '+',
   CREATE_CATEGORY: 'Створити категорію',
+  PATTERN_CANCELATION: 'Скасувати',
   PATTERN_REMOVE_MESSAGE: 'Ви впевнені, що хочете видалити цей гобелен?',
+  PATTERN_CANCEL_MESSAGE:
+    'Ви впевнені, що хочете відмінити створення цього гобелену?',
   REMOVE_CONTACT_MESSAGE: 'Ви впевнені, що хочете видалити цей контакт?',
   USER_UNACTIVE_TITLE: 'Деактивувати',
   SHOW_COMMENTS_TITLE: 'Переглянути коментарі',

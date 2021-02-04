@@ -3,16 +3,29 @@ import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { createBrowserHistory } from 'history';
 import buttonTitles from '../../../configs/button-titles';
+import useSuccessSnackbar from '../../../utils/use-success-snackbar';
 
 const BackButton = ({ type, variant, color, ...props }) => {
-  const { GO_BACK_TITLE } = buttonTitles;
+  const { openSuccessSnackbar } = useSuccessSnackbar();
+  const {
+    GO_BACK_TITLE,
+    PATTERN_CANCEL_MESSAGE,
+    PATTERN_CANCELATION
+  } = buttonTitles;
   const history = createBrowserHistory();
   return (
     <Button
       type={type}
       color={color}
       variant={variant}
-      onClick={() => history.goBack()}
+      onClick={() => {
+        openSuccessSnackbar(
+          history.goBack,
+          PATTERN_CANCEL_MESSAGE,
+          PATTERN_CANCELATION,
+          true
+        );
+      }}
       data-cy='back-btn'
       {...props}
     >
