@@ -18,7 +18,6 @@ import { selectSelectedProductAndLoading } from '../../../redux/selectors/produc
 const ProductEdit = ({ id }) => {
   const dispatch = useDispatch();
   const { product, loading } = useSelector(selectSelectedProductAndLoading);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getProduct(id));

@@ -37,7 +37,6 @@ const ContactsPage = () => {
 
   const { contacts, loading, itemsCount, currentPage, rowsPerPage } =
     useSelector(contactSelectorWithPagination);
-  console.log(loading);
   const dispatch = useDispatch();
 
   const contactDeleteHandler = (id) => {

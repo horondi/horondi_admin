@@ -31,7 +31,6 @@ const DialogWindow = ({
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    console.log(onCancelHandler);
     if (onCancelHandler) onCancelHandler();
     dispatch(closeDialog());
   };
