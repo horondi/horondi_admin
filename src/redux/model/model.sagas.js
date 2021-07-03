@@ -70,7 +70,6 @@ export function* handleAddModel({ payload }) {
     yield put(setModelLoading(true));
     yield call(createModel, payload);
     yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-    yield put(push(routes.pathToModels));
   } catch (error) {
     yield call(handleModelError, error);
   }
@@ -94,7 +93,6 @@ export function* handleModelUpdate({ payload }) {
     yield put(setModelLoading(true));
     yield call(updateModel, payload);
     yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-    yield put(push(routes.pathToModels));
   } catch (error) {
     yield call(handleModelError, error);
   }

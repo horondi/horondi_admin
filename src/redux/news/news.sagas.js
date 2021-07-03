@@ -72,7 +72,6 @@ export function* handleAddNews({ payload }) {
 
     if (newsArticle) {
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(routes.pathToNews));
     }
   } catch (error) {
     yield call(handleNewsError, error);
@@ -104,7 +103,6 @@ export function* handleNewsUpdate({ payload }) {
 
     if (newsArticle) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToNews));
     }
   } catch (error) {
     yield call(handleNewsError, error);

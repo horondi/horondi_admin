@@ -66,7 +66,6 @@ export function* handleAddPattern({ payload }) {
     yield put(setPatternLoading(true));
     yield call(createPattern, payload);
     yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-    yield put(push(config.routes.pathToPatterns));
   } catch (error) {
     yield call(handlePatternError, error);
   }
@@ -90,7 +89,6 @@ export function* handlePatternUpdate({ payload }) {
     yield put(setPatternLoading(true));
     yield call(updatePattern, payload);
     yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-    yield put(push(config.routes.pathToPatterns));
   } catch (error) {
     yield call(handlePatternError, error);
   }

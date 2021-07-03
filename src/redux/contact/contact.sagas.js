@@ -81,10 +81,8 @@ export function* handleAddContact({ payload }) {
 
     if (contact) {
       yield put(addContactInStore(payload.newContact));
-      yield put(setContactsLoading(false));
 
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(routes.pathToContacts));
     }
   } catch (error) {
     yield call(handleContactsError, error);
@@ -117,7 +115,6 @@ export function* handleContactUpdate({ payload }) {
     if (contact) {
       yield put(updateContactInStore(id, updatedContact));
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(routes.pathToContacts));
     }
   } catch (error) {
     yield call(handleContactsError, error);

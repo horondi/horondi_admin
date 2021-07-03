@@ -75,9 +75,7 @@ export function* handleAddSize({ payload }) {
     const size = yield call(addSize, payload);
 
     if (size) {
-      yield put(setSizesLoading(false));
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(config.routes.pathToSizes));
     }
   } catch (error) {
     yield call(handleSizesError, error);
@@ -92,7 +90,6 @@ export function* handleSizeUpdate({ payload }) {
 
     if (size) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToSizes));
     }
   } catch (error) {
     yield call(handleSizesError, error);

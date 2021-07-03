@@ -172,7 +172,7 @@ export function* handleProductAdd({ payload: productData }) {
       yield call(handleFilterLoad, payload);
       yield put(clearProductToSend());
       yield put(setFilesToUpload([]));
-      yield put(push(routes.pathToProducts));
+
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
     }
   } catch (e) {
@@ -195,8 +195,7 @@ export function* handleProductUpdate({ payload }) {
     if (product) {
       yield put(setProduct(product));
       yield put(clearFilesToUpload());
-      yield put(push(routes.pathToProducts));
-      yield put(setProductsLoading(false));
+
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
     }
   } catch (e) {

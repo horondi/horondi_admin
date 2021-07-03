@@ -88,7 +88,6 @@ export function* handleConstructorBasicUpdate({ payload }) {
   try {
     yield put(setModelLoading(true));
     const constructorBasic = yield call(updateConstructorBasic, payload);
-    yield put(setModelLoading(false));
     yield put(editConstructorBasicInStore({ constructorBasic }));
     yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
   } catch (error) {
@@ -132,7 +131,6 @@ export function* handleConstructorBottomUpdate({ payload }) {
   try {
     yield put(setModelLoading(true));
     const constructorBottom = yield call(updateConstructorBottom, payload);
-    yield put(setModelLoading(false));
     yield put(editConstructorBottomInStore({ constructorBottom }));
     yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
   } catch (error) {
@@ -185,7 +183,6 @@ export function* handleConstructorFrontPocketUpdate({ payload }) {
       updateConstructorFrontPocket,
       payload
     );
-    yield put(setModelLoading(false));
     yield put(editConstructorPocketInStore({ constructorFrontPocket }));
     yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
   } catch (error) {

@@ -96,7 +96,6 @@ export function* handleAddMaterial({ payload }) {
 
     if (material) {
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(config.routes.pathToMaterials));
     }
   } catch (error) {
     yield call(handleMaterialError, error);
@@ -127,7 +126,6 @@ export function* handleMaterialUpdate({ payload }) {
 
     if (materialData) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToMaterials));
     }
   } catch (error) {
     yield call(handleMaterialError, error);

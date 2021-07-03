@@ -102,7 +102,6 @@ export function* handleAddSlide({ payload }) {
 
     if (slide) {
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(config.routes.pathToHomePageSlides));
     }
   } catch (error) {
     yield call(handleSlideError, error);
@@ -116,7 +115,6 @@ export function* handleSlideUpdate({ payload }) {
 
     if (slide) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToHomePageSlides));
     }
   } catch (error) {
     yield call(handleSlideError, error);

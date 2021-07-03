@@ -71,9 +71,7 @@ export function* handleAddCategory({ payload }) {
     yield put(setCategoryLoading(true));
     const category = yield call(createCategory, payload);
     if (category) {
-      yield put(setCategoryLoading(false));
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(push(config.routes.pathToCategories));
     }
   } catch (error) {
     yield call(handleCategoryError, error);
@@ -106,7 +104,6 @@ export function* handleCategoryUpdate({ payload }) {
 
     if (category) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToCategories));
     }
   } catch (error) {
     yield call(handleCategoryError, error);

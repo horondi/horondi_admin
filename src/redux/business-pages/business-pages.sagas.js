@@ -66,8 +66,6 @@ export function* handleAddBusinessPage({ payload }) {
 
     if (businessPage) {
       yield call(handleSuccessSnackbar, SUCCESS_ADD_STATUS);
-      yield put(setLoading(false));
-      yield put(push(routes.pathToBusinessPages));
     }
   } catch (error) {
     yield call(handleBusinessPageError, error);
@@ -96,8 +94,6 @@ export function* handleBusinessPageUpdate({ payload }) {
 
     if (businessPage) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(setLoading(false));
-      yield put(push(routes.pathToBusinessPages));
     }
   } catch (error) {
     yield call(handleBusinessPageError, error);

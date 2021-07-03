@@ -110,7 +110,6 @@ export function* handleCommentUpdate({ payload }) {
 
     if (commentData) {
       yield call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS);
-      yield put(push(config.routes.pathToComments));
     }
   } catch (error) {
     yield call(handleCommentsError, error);
