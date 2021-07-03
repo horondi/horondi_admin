@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { noop } from 'lodash';
 import { push } from 'connected-react-router';
 import { useStyles } from './slides-page.styles';
 import { config } from '../../configs';
@@ -58,7 +59,7 @@ const SlidesPage = () => {
       dispatch(closeDialog());
       dispatch(deleteSlide(id));
     };
-    openSuccessSnackbar(removeSlide, REMOVE_SLIDE_MESSAGE);
+    openSuccessSnackbar(removeSlide, noop, REMOVE_SLIDE_MESSAGE);
   };
   const slidesItems = list.length
     ? list.map((slidesItem) => (

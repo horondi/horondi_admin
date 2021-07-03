@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select
 } from '@material-ui/core';
+import { noop } from 'lodash';
 import { useStyles } from './category-delete.styles';
 import { closeDialog } from '../../../redux/dialog-window/dialog-window.actions';
 import {
@@ -44,6 +45,7 @@ const CategoryDelete = () => {
     };
     openSuccessSnackbar(
       removeCategory,
+      noop,
       DELETE_CATEGORY_MESSAGE,
       DELETE_CATEGORY
     );

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
+import { noop } from 'lodash';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 
@@ -43,7 +44,7 @@ const BusinessPageList = () => {
       dispatch(closeDialog());
       dispatch(deleteBusinessPage(id));
     };
-    openSuccessSnackbar(removeBusinessPage, REMOVE_BUSINESS_PAGE);
+    openSuccessSnackbar(removeBusinessPage, noop, REMOVE_BUSINESS_PAGE);
   };
 
   const pages =

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
-
+import { noop } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Button, Typography } from '@material-ui/core';
@@ -37,7 +37,7 @@ const ContactsPage = () => {
 
   const { contacts, loading, itemsCount, currentPage, rowsPerPage } =
     useSelector(contactSelectorWithPagination);
-
+  console.log(loading);
   const dispatch = useDispatch();
 
   const contactDeleteHandler = (id) => {
@@ -46,7 +46,7 @@ const ContactsPage = () => {
       dispatch(deleteContact(id));
     };
 
-    openSuccessSnackbar(removeContact, REMOVE_CONTACT_MESSAGE);
+    openSuccessSnackbar(removeContact, noop, REMOVE_CONTACT_MESSAGE);
   };
 
   useEffect(() => {

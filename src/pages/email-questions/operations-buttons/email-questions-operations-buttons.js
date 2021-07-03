@@ -41,6 +41,7 @@ const EmailQuestionsOperationsButtons = ({
     };
     openSuccessSnackbar(
       moveToSpam,
+      noop,
       EMAIL_QUESTIONS_MOVE_TO_SPAM_MESSAGE,
       buttonTitles.TO_SPAM
     );
@@ -54,6 +55,7 @@ const EmailQuestionsOperationsButtons = ({
     };
     openSuccessSnackbar(
       deleteQuestions,
+      noop,
       EMAIL_QUESTIONS_MOVE_TO_DELETE_MESSAGE
     );
   };

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
-import { map } from 'lodash';
+import { map, noop } from 'lodash';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 
@@ -10,6 +10,7 @@ import {
   getMaterials,
   deleteMaterial
 } from '../../redux/material/material.actions.js';
+
 import { getColors } from '../../redux/color/color.actions';
 import ColorCircle from '../../components/color-circle';
 import { closeDialog } from '../../redux/dialog-window/dialog-window.actions';
@@ -75,7 +76,7 @@ const MaterialPage = () => {
       dispatch(closeDialog());
       dispatch(deleteMaterial(id));
     };
-    openSuccessSnackbar(removeMaterial, REMOVE_MATERIAL_MESSAGE);
+    openSuccessSnackbar(removeMaterial, noop, REMOVE_MATERIAL_MESSAGE);
   };
 
   const materialItems = map(list, (materialItem) => (

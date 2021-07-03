@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Paper,
@@ -13,7 +14,7 @@ import {
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
-import { find } from 'lodash';
+import { find, noop } from 'lodash';
 import useProductHandlers from '../../../hooks/product/use-product-handlers';
 import useSuccessSnackbar from '../../../utils/use-success-snackbar';
 import useProductValidation from '../../../hooks/product/use-product-validation';
@@ -26,14 +27,15 @@ import {
   addProduct,
   deleteProduct,
   setFilesToUpload,
-  updateProduct
+  updateProduct,
+  setProductsLoading
 } from '../../../redux/products/products.actions';
 import { closeDialog } from '../../../redux/dialog-window/dialog-window.actions';
 
 import { productsTranslations } from '../../../translations/product.translations';
 import DeleteButton from '../../buttons/delete-button';
 import { config } from '../../../configs';
-import { BackButton } from '../../buttons';
+import { BackButton, SaveButton } from '../../buttons';
 import ProductMaterialsContainer from '../../../containers/product-materials-container';
 import ProductAddImages from '../../../pages/products/product-add/product-add-images';
 import { selectSelectedProductAndDetails } from '../../../redux/selectors/products.selectors';
@@ -253,6 +255,7 @@ const ProductForm = ({ isEdit }) => {
     };
     openSuccessSnackbar(
       removeProduct,
+      noop,
       DELETE_PRODUCT_MESSAGE,
       DELETE_PRODUCT_TITLE
     );
@@ -279,6 +282,10 @@ const ProductForm = ({ isEdit }) => {
         setFieldValue(checkboxesValues.available, !values.available)
     }
   ];
+
+  const handleProductLoading = () => {
+    dispatch(setProductsLoading(false));
+  };
 
   const showCommentsPanel = () => {
     if (product._id) {

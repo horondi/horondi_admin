@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Link } from 'react-router-dom';
+import { noop } from 'lodash';
 import { Button, Typography } from '@material-ui/core';
 import { useCommonStyles } from '../common.styles';
 import {
@@ -57,6 +58,7 @@ const PatternPage = () => {
     };
     openSuccessSnackbar(
       removePattern,
+      noop,
       EXIT_WITHOUT_SAVING,
       PATTERN_REMOVE_MESSAGE
     );

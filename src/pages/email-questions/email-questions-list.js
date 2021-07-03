@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { noop } from 'lodash';
 import { Typography } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import { useStyles } from './email-questions-list.styles';
@@ -70,7 +71,7 @@ const EmailQuestionsList = () => {
       dispatch(closeDialog());
       dispatch(deleteEmailQuestions([id]));
     };
-    openSuccessSnackbar(removeQuestion, EMAIL_QUESTION_REMOVE_MESSAGE);
+    openSuccessSnackbar(removeQuestion, noop, EMAIL_QUESTION_REMOVE_MESSAGE);
   };
 
   const { adminId } = useSelector(({ EmailQuestions, Auth }) => ({

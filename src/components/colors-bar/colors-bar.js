@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
+import { noop } from 'lodash';
 import { push } from 'connected-react-router';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import {
@@ -49,6 +50,7 @@ function ColorsBar({ onColorChange, colors }) {
     };
     openSuccessSnackbar(
       removeColor,
+      noop,
       REMOVE_COLOR_MESSAGE,
       REMOVE_COLOR_DIALOG_TITLE
     );

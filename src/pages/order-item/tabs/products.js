@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { noop } from 'lodash';
 
 import { useStyles } from '../order-item.styles';
 import TableContainerGenerator from '../../../containers/table-container-generator';
@@ -31,7 +32,7 @@ const Products = ({ data, setFieldValue }) => {
         items.filter((item, index) => index !== indexItem)
       );
     };
-    openSuccessSnackbar(removeItem, REMOVE_ITEM);
+    openSuccessSnackbar(removeItem, noop, REMOVE_ITEM);
   };
 
   const onCloseHandler = () => {

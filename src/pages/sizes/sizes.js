@@ -53,7 +53,7 @@ const Sizes = () => {
       dispatch(closeDialog());
       dispatch(deleteSize(id));
     };
-    openSuccessSnackbar(removeSize, DELETE_SIZE_MESSAGE);
+    openSuccessSnackbar(removeSize, _.noop(), DELETE_SIZE_MESSAGE);
   };
 
   const sizeItems = _.map(sizesList, (size) => (

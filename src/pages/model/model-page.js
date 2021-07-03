@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { noop } from 'lodash';
 import { push } from 'connected-react-router';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
@@ -67,7 +68,7 @@ const ModelPage = () => {
       dispatch(closeDialog());
       dispatch(deleteModel(id));
     };
-    openSuccessSnackbar(removeModel, MODEL_REMOVE_MESSAGE);
+    openSuccessSnackbar(removeModel, noop, MODEL_REMOVE_MESSAGE);
   };
 
   if (loading) {

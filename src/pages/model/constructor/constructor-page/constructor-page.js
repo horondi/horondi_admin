@@ -18,6 +18,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Image } from '@material-ui/icons';
 import map from 'lodash/map';
+import { noop } from 'lodash';
 
 import { useStyles } from './constructor-page.styles';
 import { useCommonStyles } from '../../../common.styles';
@@ -102,7 +103,11 @@ const ConstructorPage = ({ match }) => {
       dispatch(closeDialog());
       dispatch(action({ id: modelID, constructorElementID }));
     };
-    openSuccessSnackbar(removeConstructorElement, REMOVE_CONSTRUCTOR_MESSAGE);
+    openSuccessSnackbar(
+      removeConstructorElement,
+      noop,
+      REMOVE_CONSTRUCTOR_MESSAGE
+    );
   };
   const handleConstructorOptions = (method) => {
     dispatch(push(`/constructor/${id}/add`));

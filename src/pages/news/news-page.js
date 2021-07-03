@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
-import { map } from 'lodash';
+import { map, noop } from 'lodash';
 
 import { useCommonStyles } from '../common.styles';
 import { useStyles } from './news-page.styles';
@@ -54,7 +54,7 @@ const NewsPage = () => {
       dispatch(closeDialog());
       dispatch(deleteArticle(id));
     };
-    openSuccessSnackbar(removeNews, REMOVE_MESSAGE);
+    openSuccessSnackbar(removeNews, noop, REMOVE_MESSAGE);
   };
 
   const newsItems = map(list, (newsItem, index) => (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { noop } from 'lodash';
 import { Toolbar, AppBar, Typography, IconButton } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -55,7 +55,7 @@ const NavBar = () => {
       dispatch(closeDialog());
       dispatch(logoutUser());
     };
-    openSuccessSnackbar(logout, LOGOUT_MESSAGE, LOGOUT_TITLE);
+    openSuccessSnackbar(logout, noop, LOGOUT_MESSAGE, LOGOUT_TITLE);
   };
 
   const menuToggle = (

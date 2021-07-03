@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-
+import { noop } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 
 import TableContainerRow from '../../containers/table-container-row';
@@ -38,7 +38,7 @@ const CommentsSection = ({ value, commentsType }) => {
       dispatch(closeDialog());
       dispatch(deleteComment(id));
     };
-    openSuccessSnackbar(removeComment, REMOVE_COMMENT_MESSAGE);
+    openSuccessSnackbar(removeComment, noop, REMOVE_COMMENT_MESSAGE);
   };
 
   if (loading) {

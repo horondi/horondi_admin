@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-
+import { noop } from 'lodash';
 import Typography from '@material-ui/core/Typography';
 
 import { Button } from '@material-ui/core';
@@ -82,6 +82,7 @@ const ProductsPage = () => {
     };
     openSuccessSnackbar(
       removeProduct,
+      noop,
       DELETE_PRODUCT_MESSAGE,
       DELETE_PRODUCT_TITLE
     );

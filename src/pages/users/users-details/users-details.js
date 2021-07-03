@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { noop } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Button } from '@material-ui/core';
 
@@ -83,6 +84,7 @@ const UsersDetails = (props) => {
     };
     openSuccessSnackbar(
       updateStatus,
+      noop,
       SWITCH_USER_STATUS_MESSAGE,
       SWITCH_USER_STATUS_TITLE
     );

@@ -5,6 +5,7 @@ import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ReactHtmlParser from 'react-html-parser';
+import { noop } from 'lodash';
 
 import orders from '../../configs/orders';
 import getTime from '../../utils/getTime';
@@ -79,7 +80,7 @@ const OrdersPage = () => {
       dispatch(closeDialog());
       dispatch(deleteOrder(id));
     };
-    openSuccessSnackbar(removeOrders, REMOVE_ORDER_MESSAGE);
+    openSuccessSnackbar(removeOrders, noop, REMOVE_ORDER_MESSAGE);
   };
 
   const orderItems =

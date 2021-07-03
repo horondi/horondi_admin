@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import { push } from 'connected-react-router';
-
+import { noop } from 'lodash';
 import { useCommonStyles } from '../common.styles';
 import { useStyles } from './comments.styles';
 import {
@@ -65,7 +65,7 @@ const Comments = () => {
       dispatch(closeDialog());
       dispatch(deleteComment(id));
     };
-    openSuccessSnackbar(removeComment, REMOVE_COMMENT_MESSAGE);
+    openSuccessSnackbar(removeComment, noop, REMOVE_COMMENT_MESSAGE);
   };
 
   const commentItems = map(list, (comment) => (

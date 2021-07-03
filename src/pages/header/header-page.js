@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { noop } from 'lodash';
 import { push } from 'connected-react-router';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
@@ -26,7 +27,7 @@ const HeaderPage = () => {
   const { openSuccessSnackbar } = useSuccessSnackbar();
   const { list, loading } = useSelector(({ Header }) => ({
     list: Header.list,
-    loading: Header.newsLoading
+    loading: Header.headerLoading
   }));
 
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const HeaderPage = () => {
       dispatch(closeDialog());
       dispatch(deleteHeader(id));
     };
-    openSuccessSnackbar(removeHeader, HEADER_REMOVE_MESSAGE);
+    openSuccessSnackbar(removeHeader, noop, HEADER_REMOVE_MESSAGE);
   };
 
   const headerItems =

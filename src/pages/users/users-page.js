@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { noop } from 'lodash';
+
 import { AppBar, Tabs, Tab, Typography } from '@material-ui/core';
 
 import { useCommonStyles } from '../common.styles';
@@ -42,7 +44,7 @@ const UsersPage = () => {
       dispatch(closeDialog());
       dispatch(deleteUser(id));
     };
-    openSuccessSnackbar(removeUser, REMOVE_USER_MESSAGE);
+    openSuccessSnackbar(removeUser, noop, REMOVE_USER_MESSAGE);
   };
 
   const { tab, handleTabChange } = useUsersTabs();
