@@ -118,18 +118,17 @@ describe('business pages sagas test', () => {
         [call(handleSuccessSnackbar, SUCCESS_ADD_STATUS)]
       ])
       .put(setLoading(true))
-      .put(setLoading(false))
       .hasFinalState({
         list: [],
         currentPage: null,
-        loading: false,
+        loading: true,
         error: null
       })
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
-        expect(analysisPut).toHaveLength(3);
+        expect(analysisPut).toHaveLength(1);
       }));
 
   it('#5 Should to update business page', () =>
@@ -146,18 +145,17 @@ describe('business pages sagas test', () => {
         [call(handleSuccessSnackbar, SUCCESS_UPDATE_STATUS)]
       ])
       .put(setLoading(true))
-      .put(setLoading(false))
       .hasFinalState({
         list: [],
         currentPage: null,
-        loading: false,
+        loading: true,
         error: null
       })
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
-        expect(analysisPut).toHaveLength(3);
+        expect(analysisPut).toHaveLength(1);
       }));
   it('should handle orders error', () => {
     expectSaga(handleBusinessPageError, error)

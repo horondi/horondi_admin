@@ -4,6 +4,7 @@ exports[`save button tests should click 1`] = `
 <SaveButton
   color="primary"
   errors={Object {}}
+  onCancelHandler={[Function]}
   onClickHandler={[MockFunction]}
   size="small"
   title="Зберегти"

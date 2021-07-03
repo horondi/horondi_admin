@@ -147,6 +147,7 @@ describe('Test products reducers', () => {
       productsReducer(mockProductsToAddState, clearProductToSend())
     ).toEqual({
       ...initialState,
+      loading: false,
       upload: [],
       productToSend: initialState.productToSend
     });

@@ -28,6 +28,7 @@ describe('save button tests', () => {
         size={size}
         title={title}
         type={type}
+        onCancelHandler={noop}
         onClickHandler={mockCallBack}
       />
     );

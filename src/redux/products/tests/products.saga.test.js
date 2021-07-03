@@ -290,10 +290,10 @@ describe('Test products saga', () => {
       ])
       .put(setProduct(mockProductsList.items[0]))
       .put(clearFilesToUpload())
-      .put(setProductsLoading(false))
       .hasFinalState({
         Products: {
           ...mockProductToUpload,
+          loading: true,
           upload: [],
           selectedProduct: mockProductsList.items[0]
         }
@@ -306,7 +306,7 @@ describe('Test products saga', () => {
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         expect(analysisSelect).toHaveLength(1);
         expect(analysisCall).toHaveLength(2);
-        expect(analysisPut).toHaveLength(5);
+        expect(analysisPut).toHaveLength(3);
       }));
 
   it.skip('should load product by id', () =>
