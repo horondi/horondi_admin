@@ -24,12 +24,15 @@ const DialogWindow = ({
   dialogTitle,
   dialogContent,
   showCancelButton,
+  onCancelHandler,
   onClickHandler
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
   const handleClose = () => {
+    console.log(onCancelHandler);
+    if (onCancelHandler) onCancelHandler();
     dispatch(closeDialog());
   };
 
@@ -45,14 +48,11 @@ const DialogWindow = ({
             <StandardButton
               data-cy='dialog-cancel'
               variant='outlined'
-              title={NO_BUTTON}
-              onClickHandler={handleClose}
-            />
-            <DeleteButton
-              data-cy='dialog-confirm'
+              title={YES_BUTTON}
               onClickHandler={onClickHandler}
-            >
-              {YES_BUTTON}
+            />
+            <DeleteButton data-cy='dialog-confirm' onClickHandler={handleClose}>
+              {NO_BUTTON}
             </DeleteButton>
           </>
         ) : (
@@ -75,7 +75,8 @@ DialogWindow.propTypes = {
   dialogTitle: PropTypes.string,
   dialogContent: PropTypes.string,
   showCancelButton: PropTypes.bool,
-  onClickHandler: PropTypes.func
+  onClickHandler: PropTypes.func,
+  onCancelHandler: PropTypes.func
 };
 
 DialogWindow.defaultProps = {
@@ -83,7 +84,8 @@ DialogWindow.defaultProps = {
   dialogTitle: DELETE_TITLE,
   dialogContent: '',
   showCancelButton: true,
-  onClickHandler: noop
+  onClickHandler: noop,
+  onCancelHandler: noop
 };
 
 export default connect(mapStateToProps, null)(DialogWindow);
