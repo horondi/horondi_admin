@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { noop } from 'lodash';
 import buttonTitles from '../../../configs/button-titles';
 import messages from '../../../configs/messages';
 import { closeDialog } from '../../../redux/dialog-window/dialog-window.actions';
@@ -16,7 +17,15 @@ const {
   types: { button }
 } = materialUiConstants;
 
-const BackButton = ({ type, variant, color, initial, pathBack, ...props }) => {
+const BackButton = ({
+  type,
+  variant,
+  color,
+  initial,
+  onCancelHandler,
+  pathBack,
+  ...props
+}) => {
   const { GO_BACK_TITLE, EXIT_WITHOUT_SAVING } = buttonTitles;
   const { BACK_BUTTON_WARNING_MESSAGE } = messages;
   const { openSuccessSnackbar } = useSuccessSnackbar();
@@ -31,6 +40,7 @@ const BackButton = ({ type, variant, color, initial, pathBack, ...props }) => {
     if (initial) {
       openSuccessSnackbar(
         backAction,
+        onCancelHandler,
         BACK_BUTTON_WARNING_MESSAGE,
         EXIT_WITHOUT_SAVING
       );
@@ -55,6 +65,7 @@ const BackButton = ({ type, variant, color, initial, pathBack, ...props }) => {
 
 BackButton.propTypes = {
   initial: PropTypes.bool,
+  onCancelHandler: PropTypes.func,
   color: PropTypes.string,
   type: PropTypes.string,
   variant: PropTypes.string,
@@ -62,6 +73,7 @@ BackButton.propTypes = {
 };
 BackButton.defaultProps = {
   initial: false,
+  onCancelHandler: noop,
   color: primary,
   type: button,
   variant: outlined,

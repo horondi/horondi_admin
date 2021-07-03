@@ -14,6 +14,7 @@ const SaveButton = ({
   title,
   type,
   onClickHandler,
+  onCancelHandler,
   color,
   errors,
   values,
@@ -46,7 +47,12 @@ const SaveButton = ({
       dispatch(closeDialog());
       history.goBack();
     };
-    openSuccessSnackbar(backAction, SAVE_MESSAGE, SAVE_CHANGES);
+    openSuccessSnackbar(
+      backAction,
+      onCancelHandler,
+      SAVE_MESSAGE,
+      SAVE_CHANGES
+    );
   };
 
   return (
@@ -55,6 +61,7 @@ const SaveButton = ({
       color={color}
       type={type}
       onClick={() => {
+        onClickHandler();
         saveButtonHandler();
         setTimeout(() => {
           if (!error) {
@@ -72,6 +79,7 @@ const SaveButton = ({
 
 SaveButton.propTypes = {
   onClickHandler: PropTypes.func,
+  onCancelHandler: PropTypes.func,
   color: PropTypes.string,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -83,7 +91,8 @@ SaveButton.defaultProps = {
   color: 'primary',
   errors: {},
   values: {},
-  onClickHandler: noop
+  onClickHandler: noop,
+  onCancelHandler: noop
 };
 
 export default SaveButton;
