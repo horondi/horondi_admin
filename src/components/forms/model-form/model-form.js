@@ -20,7 +20,11 @@ import useModelHandlers from '../../../utils/use-model-handlers';
 import { useStyles } from './model-form.styles';
 import { BackButton, SaveButton } from '../../buttons';
 import { config } from '../../../configs';
-import { addModel, updateModel } from '../../../redux/model/model.actions';
+import {
+  addModel,
+  updateModel,
+  setModelLoading
+} from '../../../redux/model/model.actions';
 import CheckboxOptions from '../../checkbox-options';
 import ImageUploadContainer from '../../../containers/image-upload-container';
 import {
@@ -186,6 +190,10 @@ const ModelForm = ({ model, id, isEdit }) => {
     values
   );
 
+  const handleModelLoading = () => {
+    dispatch(setModelLoading(false));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit} autoComplete={materialUiConstants.off}>
@@ -290,6 +298,7 @@ const ModelForm = ({ model, id, isEdit }) => {
           className={styles.saveButton}
           data-cy={materialUiConstants.save}
           type={materialUiConstants.types.submit}
+          onCancelHandler={handleModelLoading}
           title={MODEL_SAVE_TITLE}
           values={values}
           errors={errors}

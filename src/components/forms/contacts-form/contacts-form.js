@@ -13,6 +13,7 @@ import {
   setSnackBarStatus,
   setSnackBarMessage
 } from '../../../redux/snackbar/snackbar.actions';
+import { setContactsLoading } from '../../../redux/contact/contact.actions';
 import { useStyles } from './contacts-form.style';
 import ImageUploadContainer from '../../../containers/image-upload-container';
 import LanguagePanel from '../language-panel';
@@ -126,6 +127,10 @@ const ContactsForm = ({ contactSaveHandler, initialValues }) => {
     handleBlur,
     values,
     inputs
+  };
+
+  const handleContactLoading = () => {
+    dispatch(setContactsLoading(false));
   };
 
   const valueEquality = checkInitialValue(initialValues, values);
@@ -254,6 +259,7 @@ const ContactsForm = ({ contactSaveHandler, initialValues }) => {
           id='save'
           type='submit'
           title='Зберегти'
+          onCancelHandler={handleContactLoading}
           className={classes.saveButton}
           data-cy='save'
           values={values}

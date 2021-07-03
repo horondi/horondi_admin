@@ -16,7 +16,8 @@ import getMaterialFormInitValues from '../../../utils/material-form';
 import { useStyles } from './material-form.styles';
 import {
   addMaterial,
-  updateMaterial
+  updateMaterial,
+  setMaterialLoading
 } from '../../../redux/material/material.actions';
 import { config } from '../../../configs';
 import CheckboxOptions from '../../checkbox-options';
@@ -137,6 +138,10 @@ function MaterialForm({ material, id }) {
     values
   );
 
+  const handleMaterialLoading = () => {
+    dispatch(setMaterialLoading());
+  };
+
   return (
     <div className={styles.container}>
       <form className={styles.materialForm} onSubmit={handleSubmit}>
@@ -205,6 +210,7 @@ function MaterialForm({ material, id }) {
               className={styles.saveButton}
               data-cy='save'
               type='submit'
+              onCancelHandler={handleMaterialLoading}
               title={config.buttonTitles.SAVE_MATERIAL}
               values={values}
               errors={errors}

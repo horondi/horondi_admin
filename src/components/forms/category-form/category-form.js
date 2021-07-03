@@ -11,7 +11,8 @@ import { BackButton, SaveButton } from '../../buttons';
 import { config } from '../../../configs';
 import {
   addCategory,
-  updateCategory
+  updateCategory,
+  setCategoryLoading
 } from '../../../redux/categories/categories.actions';
 import ImageUploadContainer from '../../../containers/image-upload-container';
 import { categoryTranslations } from '../../../translations/category.translations';
@@ -100,6 +101,10 @@ const CategoryForm = ({ category, id, edit }) => {
     }
   });
 
+  const handleCategoryLoading = () => {
+    dispatch(setCategoryLoading(false));
+  };
+
   const handleImageLoad = (e) => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -167,6 +172,7 @@ const CategoryForm = ({ category, id, edit }) => {
         ))}
         <BackButton initial={!valueEquality} pathBack={pathToCategories} />
         <SaveButton
+          onCancelHandler={handleCategoryLoading}
           className={styles.saveCategoryButton}
           data-cy='save'
           type={materialUiConstants.types.submit}

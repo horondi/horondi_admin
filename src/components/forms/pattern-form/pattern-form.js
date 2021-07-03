@@ -14,7 +14,8 @@ import { BackButton, SaveButton } from '../../buttons';
 import { config } from '../../../configs';
 import {
   addPattern,
-  updatePattern
+  updatePattern,
+  setPatternLoading
 } from '../../../redux/pattern/pattern.actions';
 import CheckboxOptions from '../../checkbox-options';
 import ImageUploadPreviewContainer from '../../../containers/image-upload-container/image-upload-previewContainer';
@@ -146,6 +147,10 @@ const PatternForm = ({ pattern, id, isEdit }) => {
         );
       }
     });
+
+  const handlePatternLoading = () => {
+    dispatch(setPatternLoading());
+  };
 
   const checkboxes = [
     {
@@ -291,6 +296,7 @@ const PatternForm = ({ pattern, id, isEdit }) => {
           <SaveButton
             className={styles.saveButton}
             data-cy='save-btn'
+            onCancelHandler={handlePatternLoading}
             type='submit'
             title={SAVE_TITLE}
             values={values}

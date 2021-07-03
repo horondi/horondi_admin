@@ -9,7 +9,11 @@ import { useStyles } from './header-form.styles';
 import { BackButton, SaveButton } from '../../buttons';
 import TabPanel from '../../tab-panel';
 import { config } from '../../../configs';
-import { addHeader, updateHeader } from '../../../redux/header/header.actions';
+import {
+  addHeader,
+  updateHeader,
+  setHeaderLoading
+} from '../../../redux/header/header.actions';
 import { getHeaderInitialValues } from '../../../utils/header-form';
 import { checkInitialValue } from '../../../utils/check-initial-values';
 
@@ -60,6 +64,10 @@ const HeaderForm = ({ header, id }) => {
     getHeaderInitialValues(header),
     values
   );
+
+  const handleHeaderLoading = () => {
+    dispatch(setHeaderLoading(false));
+  };
 
   return (
     <div>
@@ -131,6 +139,7 @@ const HeaderForm = ({ header, id }) => {
           className={styles.saveButton}
           data-cy='save'
           type='submit'
+          onCancelHandler={handleHeaderLoading}
           title={config.buttonTitles.HEADER_SAVE_TITLE}
           values={values}
           errors={errors}

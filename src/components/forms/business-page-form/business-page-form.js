@@ -24,7 +24,8 @@ import {
 import {
   addBusinessPage,
   getBusinessPageById,
-  updateBusinessPage
+  updateBusinessPage,
+  setLoading
 } from '../../../redux/business-pages/business-pages.actions';
 
 import { useCommonStyles } from '../../../pages/common.styles';
@@ -162,6 +163,10 @@ const BusinessPageForm = ({ id, editMode }) => {
     inputs: businessPageLabel
   };
 
+  const handleBudinessPageLoading = () => {
+    dispatch(setLoading(false));
+  };
+
   const valueEquality = checkInitialValue(
     { code, enText, enTitle, uaText, uaTitle },
     values
@@ -212,6 +217,7 @@ const BusinessPageForm = ({ id, editMode }) => {
             type='submit'
             title='Зберегти'
             data-cy='save-btn'
+            onCancelHandler={handleBudinessPageLoading}
             values={{
               code: values.code,
               uaTitle: values.uaTitle,

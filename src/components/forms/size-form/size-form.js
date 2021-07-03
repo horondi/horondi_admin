@@ -17,7 +17,11 @@ import {
 } from '../../../utils/size-helpers';
 import { formSchema } from '../../../validations/sizes/size-form-validation';
 import { useStyles } from './size-form.styles';
-import { addSize, updateSize } from '../../../redux/sizes/sizes.actions';
+import {
+  addSize,
+  updateSize,
+  setSizesLoading
+} from '../../../redux/sizes/sizes.actions';
 import { sizesSelectorWithPagination } from '../../../redux/selectors/sizes.selector';
 import { config } from '../../../configs';
 import CheckboxOptions from '../../checkbox-options';
@@ -69,6 +73,10 @@ function SizeForm({ id, size }) {
       handler: () => setFieldValue(labels.en.available, !values.available)
     }
   ];
+
+  const handleSizeLoading = () => {
+    dispatch(setSizesLoading(false));
+  };
 
   if (loading) {
     return <LoadingBar />;
@@ -199,6 +207,7 @@ function SizeForm({ id, size }) {
             data-cy={materialUiConstants.save}
             type={materialUiConstants.types.submit}
             title={config.buttonTitles.SAVE_SIZE_TITLE}
+            onCancelHandler={handleSizeLoading}
             values={values}
             errors={errors}
           />

@@ -24,6 +24,7 @@ import { BackButton, SaveButton } from '../../buttons';
 import useConstructorHandlers from '../../../utils/use-constructor-handlers';
 import ColorCircle from '../../color-circle';
 import { selectConstructorMethodAndMaterials } from '../../../redux/selectors/constructor.selectors';
+import { setModelLoading } from '../../../redux/model/model.actions';
 import LanguagePanel from '../language-panel';
 
 const { IMG_URL } = config;
@@ -169,6 +170,10 @@ const ConstructorForm = ({ isEdit, editableConstructorElement }) => {
     }
   };
 
+  const handleConstructorLoading = () => {
+    dispatch(setModelLoading(false));
+  };
+
   const handleLoadConstructorImage = (e) => {
     handleImageLoad(e, (event) => {
       setFieldValue('image', event.target.result);
@@ -287,6 +292,7 @@ const ConstructorForm = ({ isEdit, editableConstructorElement }) => {
         <BackButton />
         <SaveButton
           className={styles.saveButton}
+          onCancelHandler={handleConstructorLoading}
           data-cy='save-btn'
           type='submit'
           title={SAVE_TITLE}

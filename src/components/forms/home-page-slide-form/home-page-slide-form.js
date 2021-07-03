@@ -15,7 +15,8 @@ import ImageUploadContainer from '../../../containers/image-upload-container';
 import { BackButton, SaveButton } from '../../buttons';
 import {
   addSlide,
-  updateSlide
+  updateSlide,
+  setSlideLoading
 } from '../../../redux/home-page-slides/home-page-slides.actions';
 import LanguagePanel from '../language-panel';
 import { getHomePageSlidesInitialValues } from '../../../utils/home-page-slides';
@@ -117,6 +118,10 @@ const HomePageSlideForm = ({ slide, id, slideOrder }) => {
     values
   );
 
+  const handleHomePageSlideLoading = () => {
+    dispatch(setSlideLoading(false));
+  };
+
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
@@ -160,6 +165,7 @@ const HomePageSlideForm = ({ slide, id, slideOrder }) => {
           className={styles.formButton}
           data-cy='save'
           type='submit'
+          onCancelHandler={handleHomePageSlideLoading}
           title={config.buttonTitles.CREATE_SLIDE_TITLE}
           values={values}
           errors={errors}

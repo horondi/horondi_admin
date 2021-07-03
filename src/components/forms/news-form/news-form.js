@@ -9,7 +9,11 @@ import { useStyles } from './news-form.styles';
 import { SaveButton, BackButton } from '../../buttons';
 import useNewsHandlers from '../../../utils/use-news-handlers';
 import { config } from '../../../configs';
-import { addArticle, updateArticle } from '../../../redux/news/news.actions';
+import {
+  addArticle,
+  updateArticle,
+  setNewsLoading
+} from '../../../redux/news/news.actions';
 import ImageUploadPreviewContainer from '../../../containers/image-upload-container/image-upload-previewContainer';
 import LanguagePanel from '../language-panel';
 import { useFormikInitialValues } from '../../../utils/news-form';
@@ -147,6 +151,10 @@ const NewsForm = ({ id, newsArticle, editMode }) => {
     return value;
   };
 
+  const handleNewsLoading = () => {
+    dispatch(setNewsLoading(false));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -158,6 +166,7 @@ const NewsForm = ({ id, newsArticle, editMode }) => {
             <Grid item className={styles.button}>
               <SaveButton
                 className={styles.saveButton}
+                onCancelHandler={handleNewsLoading}
                 data-cy='save'
                 type='submit'
                 title={SAVE_TITLE}

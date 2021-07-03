@@ -11,7 +11,10 @@ import { useStyles } from './comment-form.styles';
 import { BackButton, SaveButton } from '../../buttons';
 import CheckboxOptions from '../../checkbox-options';
 import { config } from '../../../configs';
-import { updateComment } from '../../../redux/comments/comments.actions';
+import {
+  updateComment,
+  setCommentsLoading
+} from '../../../redux/comments/comments.actions';
 
 const { COMMENT_VALIDATION_ERROR, COMMENT_ERROR_MESSAGE, MAX_LENGTH_MESSAGE } =
   config.commentErrorMessages;
@@ -72,6 +75,10 @@ const CommentForm = ({ comment, id, isEdit }) => {
     history.push(pathToEditProduct.replace(':id', comment.product._id));
   }
 
+  const handleCommentLoading = () => {
+    dispatch(setCommentsLoading(false));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -102,6 +109,7 @@ const CommentForm = ({ comment, id, isEdit }) => {
             className={styles.saveCommentButton}
             data-cy='save'
             type='submit'
+            onCancelHandler={handleCommentLoading}
             title={SAVE_TITLE}
             errors={errors}
             values={values}
