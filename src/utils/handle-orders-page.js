@@ -1,5 +1,6 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { noop } from 'lodash';
 
 import TableContainerGenerator from '../containers/table-container-generator';
 import { config } from '../configs';
@@ -48,7 +49,7 @@ export const handleOrderSubmition = (
         resetForm({ values: initialValues });
       }
     };
-    openSuccessSnackbar(updateOrderSnackbar, dialogContent, buttonTitle);
+    openSuccessSnackbar(updateOrderSnackbar, noop, dialogContent, buttonTitle);
   } else if (id) {
     dispatch(updateOrder(newOrder(data), id));
   } else {
