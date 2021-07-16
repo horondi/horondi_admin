@@ -5,69 +5,61 @@ import PropTypes from 'prop-types';
 import { Paper, TextField, Grid, Box, Typography } from '@material-ui/core';
 import * as Yup from 'yup';
 
-import usePocketsHandlers from '../../../utils/use-pockets-handlers';
-import { useStyles } from './pockets-form.styles';
+import usePositionHandlers from '../../../utils/use-position-handlers';
+import { useStyles } from './position-form.styles';
 import { BackButton, SaveButton } from '../../buttons';
 import { config } from '../../../configs';
 import {
-  addPockets,
-  updatePocket
-} from '../../../redux/pockets/pockets.actions';
-import ImageUploadContainer from '../../../containers/image-upload-container';
-import { pocketsTranslations } from '../../../translations/pockets.translations';
-import {
-  setSnackBarSeverity,
-  setSnackBarStatus,
-  setSnackBarMessage
-} from '../../../redux/snackbar/snackbar.actions';
+  addPosition
+  //   updatePosition
+} from '../../../redux/position/position.actions';
+// import ImageUploadContainer from '../../../containers/image-upload-container';
+// import { pocketsTranslations } from '../../../translations/pockets.translations';
+// import {
+//   setSnackBarSeverity,
+//   setSnackBarStatus,
+//   setSnackBarMessage
+// } from '../../../redux/snackbar/snackbar.actions';
 import LanguagePanel from '../language-panel';
-import { getPocketsInitialValues } from '../../../utils/pockets-form';
+import { getPositionInitialValues } from '../../../utils/position-form';
 import CheckboxOptions from '../../checkbox-options';
-import { checkInitialValue } from '../../../utils/check-initial-values';
+// import { checkInitialValue } from '../../../utils/check-initial-values';
 
-const labels = config.labels.pocketsPageLabel;
+const labels = config.labels.positionPageLabel;
 
 const {
-  POCKETS_VALIDATION_ERROR,
-  POCKETS_ERROR_MESSAGE,
-  POCKETS_UA_NAME_MESSAGE,
-  POCKETS_EN_NAME_MESSAGE,
-  POCKETS_MAX_LENGTH_MESSAGE,
-  POCKETS_MIN_LENGTH_MESSAGE,
-} = config.pocketsErrorMessages;
+  POSITION_MAX_LENGTH_MESSAGE,
+  POSITION_MIN_LENGTH_MESSAGE,
+  POSITION_ERROR_MESSAGE,
+  POSITION_UA_NAME_MESSAGE,
+  POSITION_EN_NAME_MESSAGE
+} = config.positionErrorMessages;
 
 const { SAVE_TITLE } = config.buttonTitles;
 const { languages } = config;
-const { POCKETS_ERROR } = pocketsTranslations;
-const { IMG_URL } = config;
-const { enNameCreation, uaNameCreation, additionalPriceRegExp } =
-  config.formRegExp;
-const { materialUiConstants } = config;
+// const { POCKETS_ERROR } = pocketsTranslations;
+// const { IMG_URL } = config;
+const { enNameCreation, uaNameCreation } = config.formRegExp;
+// const { materialUiConstants } = config;
 
-const PocketsForm = ({ pocket, id, edit }) => {
+const PositionForm = ({ position, id, edit }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { createPockets, setUpload, upload, pocketsImage, setPocketsImage } =
-    usePocketsHandlers();
+  const { createPosition } = usePositionHandlers();
+  const { pathToPosition } = config.routes;
 
-  const { pathToPockets } = config.routes;
-
-  const pocketsValidationSchema = Yup.object().shape({
+  const positionValidationSchema = Yup.object().shape({
     uaName: Yup.string()
-      .min(2, POCKETS_MIN_LENGTH_MESSAGE)
-      .max(50, POCKETS_MAX_LENGTH_MESSAGE)
-      .required(POCKETS_ERROR_MESSAGE)
-      .matches(uaNameCreation, POCKETS_UA_NAME_MESSAGE),
+      .min(2, POSITION_MIN_LENGTH_MESSAGE)
+      .max(50, POSITION_MAX_LENGTH_MESSAGE)
+      .required(POSITION_ERROR_MESSAGE)
+      .matches(uaNameCreation, POSITION_UA_NAME_MESSAGE),
     enName: Yup.string()
-      .min(2, POCKETS_MIN_LENGTH_MESSAGE)
-      .max(50, POCKETS_MAX_LENGTH_MESSAGE)
-      .required(POCKETS_ERROR_MESSAGE)
-      .matches(enNameCreation, POCKETS_EN_NAME_MESSAGE),
-    additionalPrice: Yup.string()
-      .required(POCKETS_ERROR_MESSAGE)
-      .matches(additionalPriceRegExp, POCKETS_VALIDATION_ERROR)
-      .nullable()
+      .min(2, POSITION_MIN_LENGTH_MESSAGE)
+      .max(50, POSITION_MAX_LENGTH_MESSAGE)
+      .required(POSITION_ERROR_MESSAGE)
+      .matches(enNameCreation, POSITION_EN_NAME_MESSAGE)
   });
 
   const {
@@ -79,57 +71,60 @@ const PocketsForm = ({ pocket, id, edit }) => {
     errors,
     setFieldValue
   } = useFormik({
-    validationSchema: pocketsValidationSchema,
-    initialValues: getPocketsInitialValues(edit, IMG_URL, pocket),
+    validationSchema: positionValidationSchema,
+    initialValues: getPositionInitialValues(edit, position),
     onSubmit: (data) => {
-      const newPocket = createPockets(data);
-      const uploadCondition = upload instanceof File;
+      const newPosition = createPosition(data);
 
-      if (id) {
-        dispatch(
-          updatePocket({
-            id,
-            pocket: newPocket,
-            upload
-          })
-        );
-        return;
-      }
-      dispatch(addPockets({ pocket: newPocket, upload }));
+      
+      //     const uploadCondition = upload instanceof File;
 
-      if (!uploadCondition && !pocket.images.thumbnail) {
-        dispatch(setSnackBarSeverity('error'));
-        dispatch(setSnackBarMessage(POCKETS_ERROR));
-        dispatch(setSnackBarStatus(true));
-      }
+      // if (id) {
+      //   dispatch(
+      //     updatePosition({
+      //       id,
+      //       position: newPosition
+      //     })
+      //   );
+      //   return;
+      // }
+      dispatch(addPosition({ position: newPosition }));
+
+      //     if (!uploadCondition && !pocket.images.thumbnail) {
+      //       dispatch(setSnackBarSeverity('error'));
+      //       dispatch(setSnackBarMessage(POCKETS_ERROR));
+      //       dispatch(setSnackBarStatus(true));
+      //     }
     }
   });
 
-  const handleImageLoad = (files) => {
-    if (files && files[0]) {
-      const reader = new FileReader();
-      reader.onload = (data) => {
-        setFieldValue('pocketImage', data.target.result);
-        setPocketsImage(data.target.result);
-      };
-      reader.readAsDataURL(files[0]);
-      setUpload(files[0]);
-    }
-  };
+  //   const handleImageLoad = (e) => {
+  //     if (e.target.files && e.target.files[0]) {
+  //       const reader = new FileReader();
+  //       reader.onload = (data) => {
+  //         setFieldValue('pocketImage', data.target.result);
+  //         setPocketsImage(data.target.result);
+  //       };
+  //       reader.readAsDataURL(e.target.files[0]);
+  //       setUpload(e.target.files[0]);
+  //     }
+  //   };
 
   const checkboxes = [
     {
-      id: 'restriction',
-      dataCy: 'restriction',
-      value: values.restriction,
-      checked: values.restriction,
+      id: 'position',
+      dataCy: 'position',
+      value: values.avaliable,
+      checked: values.avaliable,
       color: 'primary',
       label: labels.avaliable,
-      handler: () => setFieldValue('restriction', !values.restriction)
+      handler: () => setFieldValue('avaliable', !values.avaliable)
     }
   ];
 
-  const inputs = [{ label: labels.pocketsName, name: 'name' }];
+  const inputs = [{ label: labels.positionName, name: 'name' }];
+
+  // console.log(values)
 
   const inputOptions = {
     errors,
@@ -140,10 +135,10 @@ const PocketsForm = ({ pocket, id, edit }) => {
     inputs
   };
 
-  const valueEquality = checkInitialValue(
-    getPocketsInitialValues(edit, IMG_URL, pocket),
-    values
-  );
+  //   const valueEquality = checkInitialValue(
+  //     getPocketsInitialValues(edit, IMG_URL, pocket),
+  //     values
+  //   );
 
   const eventPreventHandler = (e) => {
     e.preventDefault();
@@ -157,8 +152,8 @@ const PocketsForm = ({ pocket, id, edit }) => {
             <Grid item className={styles.button}>
               <BackButton
                 className={styles.returnButton}
-                initial={!valueEquality}
-                pathBack={pathToPockets}
+                //   initial={!valueEquality}
+                pathBack={pathToPosition}
               />
             </Grid>
             <Grid item className={styles.button}>
@@ -177,7 +172,7 @@ const PocketsForm = ({ pocket, id, edit }) => {
         <div>
           <CheckboxOptions options={checkboxes} />
         </div>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper>
             <span className={styles.imageUpload}>{labels.avatarText}</span>
             <div className={styles.imageUploadAvatar}>
@@ -192,11 +187,11 @@ const PocketsForm = ({ pocket, id, edit }) => {
               </div>
             )}
           </Paper>
-        </Grid>
+        </Grid> */}
         {languages.map((lang) => (
           <LanguagePanel lang={lang} inputOptions={inputOptions} key={lang} />
         ))}
-        <Paper className={styles.additionalPrice}>
+        {/* <Paper className={styles.additionalPrice}>
           <Box>
             <Typography>{labels.enterPrice}</Typography>
           </Box>
@@ -221,49 +216,49 @@ const PocketsForm = ({ pocket, id, edit }) => {
               {errors.additionalPrice}
             </div>
           )}
-        </Paper>
+        </Paper> */}
       </form>
     </div>
   );
 };
 
-PocketsForm.propTypes = {
-  id: PropTypes.string,
-  pocket: PropTypes.shape({
-    images: PropTypes.shape({
-      thumbnail: PropTypes.string
-    })
-  }),
+PositionForm.propTypes = {
+  //   id: PropTypes.string,
+  //   pocket: PropTypes.shape({
+  //     images: PropTypes.shape({
+  //       thumbnail: PropTypes.string
+  //     })
+  //   }),
   values: PropTypes.shape({
-    pocketsImage: PropTypes.string,
+    // pocketsImage: PropTypes.string,
     uaName: PropTypes.string,
     enName: PropTypes.string,
-    restrictions: PropTypes.bool,
-    optionType: PropTypes.string
+    avaliable: PropTypes.bool
+    // optionType: PropTypes.string
   }),
   errors: PropTypes.shape({
-    pocketsImage: PropTypes.string,
+    // pocketsImage: PropTypes.string,
     uaName: PropTypes.string,
     enName: PropTypes.string,
-    restrictions: PropTypes.bool,
-    optionType: PropTypes.string
+    avaliable: PropTypes.bool
+    // optionType: PropTypes.string
   }),
   touched: PropTypes.shape({
-    pocketsImage: PropTypes.string,
+    // pocketsImage: PropTypes.string,
     uaName: PropTypes.string,
     enName: PropTypes.string,
-    restrictions: PropTypes.bool,
-    optionType: PropTypes.string
-  }),
-  edit: PropTypes.bool
+    avaliable: PropTypes.bool
+    // optionType: PropTypes.string
+  })
+  //   edit: PropTypes.bool
 };
 
-PocketsForm.defaultProps = {
+PositionForm.defaultProps = {
   id: '',
   values: {},
   errors: {},
   touched: {},
-  pocket: {
+  position: {
     _id: '',
     name: [
       {
@@ -275,10 +270,7 @@ PocketsForm.defaultProps = {
         value: ''
       }
     ],
-    images: {
-      thumbnail: ''
-    },
-    restrictions: false,
+    avaliable: false,
     optionType: null,
     additionalPrice: [
       { value: null, currency: '' },
@@ -288,4 +280,4 @@ PocketsForm.defaultProps = {
   edit: false
 };
 
-export default PocketsForm;
+export default PositionForm;
